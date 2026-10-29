@@ -2,6 +2,12 @@
 
 All notable changes to DevDiary are documented here. This project follows [Semantic Versioning](https://semver.org/).
 
+## [0.3.2] - 2026-10-29
+
+### Changed
+
+- Added a demo GIF to the README.
+
 ## [0.3.1] - 2026-10-29
 
 ### Security

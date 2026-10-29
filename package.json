@@ -2,7 +2,7 @@
   "name": "devdiary",
   "displayName": "DevDiary – AI Daily Work Report Generator",
   "description": "Automatically tracks what you work on (files, commits, coding time — never your code) and writes your daily work report or standup update with AI, in any language.",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "publisher": "malahimaamir",
   "author": {
     "name": "Malahima Amir"

@@ -12,3 +12,4 @@ esbuild.js
 .gitignore
 PUBLISHING.md
 *.vsix
+media/demo.gif

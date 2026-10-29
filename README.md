@@ -4,6 +4,8 @@
 
 Your code never leaves your machine, and it is never stored.
 
+![DevDiary turning a day of coding into a bullet-point and one-line report](media/demo.gif)
+
 ---
 
 ## Features
