@@ -1,0 +1,228 @@
+{
+  "name": "devdiary",
+  "displayName": "DevDiary – AI Daily Work Report Generator",
+  "description": "Automatically tracks what you work on (files, commits, coding time — never your code) and writes your daily work report or standup update with AI, in any language.",
+  "version": "0.2.2",
+  "publisher": "malahimaamir",
+  "author": {
+    "name": "Malahima Amir"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/malahimaamir/devdiary.git"
+  },
+  "bugs": {
+    "url": "https://github.com/malahimaamir/devdiary/issues"
+  },
+  "homepage": "https://github.com/malahimaamir/devdiary#readme",
+  "icon": "media/icon.png",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other",
+    "AI"
+  ],
+  "keywords": [
+    "daily report",
+    "daily work report",
+    "work report",
+    "report generator",
+    "standup",
+    "daily standup",
+    "worklog",
+    "work log",
+    "timesheet",
+    "productivity",
+    "activity tracker",
+    "time tracking",
+    "dev diary",
+    "developer diary",
+    "summary",
+    "ai",
+    "copilot",
+    "claude",
+    "ollama",
+    "git"
+  ],
+  "galleryBanner": {
+    "color": "#4F46E5",
+    "theme": "dark"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "extensionKind": [
+    "workspace"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "devdiary.generate",
+        "title": "Generate Today's Report",
+        "category": "DevDiary"
+      },
+      {
+        "command": "devdiary.generateWeekly",
+        "title": "Generate Weekly Report",
+        "category": "DevDiary"
+      },
+      {
+        "command": "devdiary.generateForDate",
+        "title": "Generate Report for a Date",
+        "category": "DevDiary"
+      },
+      {
+        "command": "devdiary.setApiKey",
+        "title": "Set AI API Key",
+        "category": "DevDiary"
+      },
+      {
+        "command": "devdiary.toggleTracking",
+        "title": "Pause / Resume Tracking",
+        "category": "DevDiary"
+      },
+      {
+        "command": "devdiary.clearData",
+        "title": "Clear All Stored Activity",
+        "category": "DevDiary"
+      },
+      {
+        "command": "devdiary.openSettings",
+        "title": "Open Settings",
+        "category": "DevDiary"
+      }
+    ],
+    "configuration": {
+      "title": "DevDiary",
+      "properties": {
+        "devdiary.language": {
+          "type": "string",
+          "default": "English",
+          "markdownDescription": "Language the report is written in. Free text, e.g. `English`, `Urdu`, `Roman Urdu`, `Deutsch`, `Español`, `日本語`.",
+          "order": 0
+        },
+        "devdiary.style": {
+          "type": "string",
+          "enum": [
+            "oneline",
+            "bullets",
+            "detailed",
+            "standup"
+          ],
+          "enumDescriptions": [
+            "A single sentence summarizing the day.",
+            "A short bullet list — ideal for standups.",
+            "A detailed report grouped by project, with commits and files.",
+            "Daily standup: Done / Next / Blockers"
+          ],
+          "default": "bullets",
+          "description": "Format of the generated report.",
+          "order": 1
+        },
+        "devdiary.aiProvider": {
+          "type": "string",
+          "enum": [
+            "copilot",
+            "claude",
+            "openai",
+            "gemini",
+            "ollama",
+            "none"
+          ],
+          "enumDescriptions": [
+            "GitHub Copilot via the VS Code Language Model API (no API key needed).",
+            "Anthropic Claude — requires an API key (DevDiary: Set AI API Key).",
+            "OpenAI — requires an API key (DevDiary: Set AI API Key).",
+            "Google Gemini — requires an API key (DevDiary: Set AI API Key).",
+            "Local Ollama server — free and fully offline.",
+            "No AI — use the built-in template report."
+          ],
+          "default": "copilot",
+          "description": "AI provider used to write the report. Falls back to the template report if unavailable.",
+          "order": 2
+        },
+        "devdiary.model": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Optional model name override for the selected provider (e.g. `gpt-4o-mini`, `llama3.1`). Leave empty for the provider's default.",
+          "order": 3
+        },
+        "devdiary.ollamaUrl": {
+          "type": "string",
+          "default": "http://localhost:11434",
+          "description": "Base URL of your Ollama server.",
+          "order": 4
+        },
+        "devdiary.autoGenerateAt": {
+          "type": "string",
+          "default": "",
+          "pattern": "^$|^([01]\\d|2[0-3]):[0-5]\\d$",
+          "patternErrorMessage": "Use 24-hour HH:MM format (e.g. 18:00), or leave empty to disable.",
+          "markdownDescription": "At this local time (`HH:MM`, 24-hour) DevDiary prompts you to generate today's report. Leave empty to disable.",
+          "order": 5
+        },
+        "devdiary.ignorePatterns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "**/node_modules/**",
+            "**/.git/**",
+            "**/dist/**",
+            "**/out/**",
+            "**/build/**",
+            "**/.env",
+            "**/.env.*",
+            "**/*.key",
+            "**/*.pem"
+          ],
+          "description": "Glob patterns for files that should never be tracked.",
+          "order": 6
+        },
+        "devdiary.idleTimeoutMinutes": {
+          "type": "number",
+          "default": 5,
+          "minimum": 1,
+          "description": "Minutes without activity after which coding time stops being counted.",
+          "order": 7
+        },
+        "devdiary.keepDays": {
+          "type": "number",
+          "default": 30,
+          "minimum": 1,
+          "description": "Number of days of activity history to keep locally.",
+          "order": 8
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "package": "node esbuild.js --production",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test test/unit/*.test.ts",
+    "vscode:prepublish": "npm run package",
+    "vsix": "vsce package",
+    "publish:vsce": "vsce publish",
+    "publish:ovsx": "ovsx publish"
+  },
+  "devDependencies": {
+    "@types/diff": "^8.0.0",
+    "@types/node": "^20.17.0",
+    "@types/vscode": "^1.90.0",
+    "@vscode/vsce": "^3.1.0",
+    "esbuild": "^0.28.0",
+    "ovsx": "^0.10.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.9.0"
+  },
+  "dependencies": {
+    "diff": "^8.0.0",
+    "minimatch": "^10.0.1"
+  }
+}
