@@ -2,7 +2,7 @@
   "name": "devdiary",
   "displayName": "DevDiary – AI Daily Work Report Generator",
   "description": "Automatically tracks what you work on (files, commits, coding time — never your code) and writes your daily work report or standup update with AI, in any language.",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "publisher": "malahimaamir",
   "author": {
     "name": "Malahima Amir"
@@ -157,13 +157,15 @@
           "type": "string",
           "default": "http://localhost:11434",
           "description": "Base URL of your Ollama server.",
-          "order": 4
+          "order": 4,
+          "scope": "machine"
         },
         "devdiary.claudeCodePath": {
           "type": "string",
           "default": "claude",
           "markdownDescription": "Command or full path of the Claude Code CLI, used when **AI Provider** is `claude-code`.",
-          "order": 4
+          "order": 4,
+          "scope": "machine"
         },
         "devdiary.autoGenerateAt": {
           "type": "string",

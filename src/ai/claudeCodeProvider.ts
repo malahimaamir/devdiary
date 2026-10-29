@@ -38,6 +38,10 @@ export class ClaudeCodeProvider implements AIProvider {
   }
 
   async generate(system: string, user: string, signal?: AbortSignal): Promise<string> {
+    // The model name goes on a shell command line on Windows: only allow plain model ids/aliases.
+    if (!/^[\w.:/[\]-]+$/.test(this.model)) {
+      throw new Error(`Invalid Claude Code model name "${this.model}". Check "devdiary.model".`);
+    }
     const dir = await mkdtemp(join(tmpdir(), 'devdiary-'));
     try {
       const systemFile = join(dir, 'system.txt');
@@ -46,6 +50,8 @@ export class ClaudeCodeProvider implements AIProvider {
         '-p',
         '--model', this.model,
         '--tools', IS_WINDOWS ? '""' : '', // no tools: it only writes text
+        '--strict-mcp-config', // no MCP servers (user config / claude.ai connectors) either
+        '--disable-slash-commands',
         '--no-session-persistence',
         '--output-format', 'text',
         '--system-prompt-file', quote(systemFile),

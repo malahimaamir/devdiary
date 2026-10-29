@@ -2,6 +2,13 @@
 
 All notable changes to DevDiary are documented here. This project follows [Semantic Versioning](https://semver.org/).
 
+## [0.3.1] - 2026-10-29
+
+### Security
+
+- Claude Code provider now also disables MCP servers and slash commands, and rejects unsafe model names.
+- `devdiary.claudeCodePath` and `devdiary.ollamaUrl` can only be set in user settings, not by a workspace.
+
 ## [0.3.0] - 2026-10-29
 
 ### Added
