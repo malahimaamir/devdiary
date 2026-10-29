@@ -7,6 +7,7 @@ export interface DevDiaryConfig {
   aiProvider: ProviderId;
   model: string;
   ollamaUrl: string;
+  claudeCodePath: string;
   autoGenerateAt: string;
   ignorePatterns: string[];
   idleTimeoutMinutes: number;
@@ -14,7 +15,7 @@ export interface DevDiaryConfig {
 }
 
 const STYLES: readonly Style[] = ['oneline', 'bullets', 'detailed', 'standup'];
-const PROVIDERS: readonly ProviderId[] = ['copilot', 'claude', 'openai', 'gemini', 'ollama', 'none'];
+const PROVIDERS: readonly ProviderId[] = ['copilot', 'claude-code', 'claude', 'openai', 'gemini', 'ollama', 'none'];
 
 /** Defaults mirror the `contributes.configuration` section of package.json. */
 export const DEFAULT_IGNORE_PATTERNS: readonly string[] = [
@@ -48,6 +49,7 @@ export function getConfig(): DevDiaryConfig {
     aiProvider: oneOf(c.get('aiProvider'), PROVIDERS, 'copilot'),
     model: c.get<string>('model', '').trim(),
     ollamaUrl: c.get<string>('ollamaUrl', 'http://localhost:11434').trim() || 'http://localhost:11434',
+    claudeCodePath: c.get<string>('claudeCodePath', 'claude').trim() || 'claude',
     autoGenerateAt: c.get<string>('autoGenerateAt', '').trim(),
     ignorePatterns: Array.isArray(ignorePatterns)
       ? ignorePatterns.filter((p): p is string => typeof p === 'string' && p.length > 0)

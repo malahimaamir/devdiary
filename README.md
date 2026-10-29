@@ -13,7 +13,7 @@ Your code never leaves your machine, and it is never stored.
 - **Weekly reports.** Summarize the last 7 days — themes and progress across the week — with **DevDiary: Generate Weekly Report**.
 - **Any language.** Set `devdiary.language` to `English`, `Urdu`, `Roman Urdu`, `Deutsch`, `Español`, `Français`, `日本語`, `हिन्दी` … any language the AI model speaks.
 - **Four styles.** `oneline` (one sentence), `bullets` (a short bullet list), `detailed` (one paragraph with commits and files), or `standup` (Done / Next / Blockers, with headings in your language).
-- **Bring your own AI.** GitHub Copilot (no key needed), Claude, OpenAI, Gemini, a local Ollama model, or no AI at all (built-in template report).
+- **Bring your own AI.** GitHub Copilot or Claude Code (no key needed), Claude API, OpenAI, Gemini, a local Ollama model, or no AI at all (built-in template report).
 - **Scheduled reports.** Have your report generated automatically at a time of day, e.g. `18:00`.
 - **Status bar.** See today's active coding time at a glance and pause tracking with one click.
 - **Privacy first.** Only metadata is stored, locally. Sensitive files (`.env`, `*.pem`, `*.key`, …) are ignored by default.
@@ -41,6 +41,7 @@ Choose a provider with the `devdiary.aiProvider` setting. If the selected provid
 | Provider | Setup |
 | --- | --- |
 | `copilot` (default) | Sign in to GitHub Copilot in VS Code. DevDiary uses the VS Code Language Model API — no API key needed. The first time, VS Code asks you to allow DevDiary to use the model. |
+| `claude-code` | Have [Claude Code](https://claude.com/claude-code) installed and signed in. DevDiary runs `claude -p` with the fast `haiku` model, using your existing Claude login — no API key. It runs in an empty temp folder with all tools disabled, so it never reads your project. Set `devdiary.claudeCodePath` if `claude` is not on your PATH. |
 | `claude` | Get an API key from [console.anthropic.com](https://console.anthropic.com), then run **DevDiary: Set AI API Key**. |
 | `openai` | Get an API key from [platform.openai.com](https://platform.openai.com/api-keys), then run **DevDiary: Set AI API Key**. |
 | `gemini` | Get an API key from [Google AI Studio](https://aistudio.google.com/app/apikey), then run **DevDiary: Set AI API Key**. |
@@ -57,9 +58,10 @@ Use `devdiary.model` to override the default model of a provider (for example `g
 | --- | --- | --- |
 | `devdiary.language` | `English` | Language the report is written in (free text). |
 | `devdiary.style` | `bullets` | `oneline`, `bullets`, `detailed` or `standup` (Done / Next / Blockers). |
-| `devdiary.aiProvider` | `copilot` | `copilot`, `claude`, `openai`, `gemini`, `ollama` or `none`. |
+| `devdiary.aiProvider` | `copilot` | `copilot`, `claude-code`, `claude`, `openai`, `gemini`, `ollama` or `none`. |
 | `devdiary.model` | `""` | Optional model override for the selected provider. |
 | `devdiary.ollamaUrl` | `http://localhost:11434` | Base URL of your Ollama server. |
+| `devdiary.claudeCodePath` | `claude` | Command or full path of the Claude Code CLI. |
 | `devdiary.autoGenerateAt` | `""` | Generate today's report automatically at `HH:MM` (24-hour). Empty disables. |
 | `devdiary.ignorePatterns` | `node_modules`, `.git`, `dist`, `out`, `build`, `.env`, `.env.*`, `*.key`, `*.pem` | Glob patterns of files that are never tracked. |
 | `devdiary.idleTimeoutMinutes` | `5` | Minutes of inactivity after which coding time stops counting. |
@@ -94,7 +96,7 @@ DevDiary is built so you can use it at work without worrying.
 No. It counts changed lines when you save, but the code itself is never stored or sent anywhere.
 
 **Do I need a paid AI subscription?**
-No. Use GitHub Copilot if you have it, a free local model via Ollama, or `none` for a template report.
+No. Use GitHub Copilot or Claude Code if you have them, a free local model via Ollama, or `none` for a template report.
 
 **Can I get the report in my own language?**
 Yes. Set `devdiary.language` to any language name, for example `Urdu`, `Roman Urdu`, `Türkçe` or `Português`.

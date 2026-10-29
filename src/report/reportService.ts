@@ -11,6 +11,7 @@ import { dateKeysBetween } from '../util/date';
 
 const PROVIDER_NAMES: Record<ProviderId, string> = {
   copilot: 'GitHub Copilot',
+  'claude-code': 'Claude Code',
   claude: 'Claude',
   openai: 'OpenAI',
   gemini: 'Gemini',

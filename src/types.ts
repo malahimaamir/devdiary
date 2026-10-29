@@ -1,5 +1,5 @@
 export type Style = 'oneline' | 'bullets' | 'detailed' | 'standup';
-export type ProviderId = 'copilot' | 'claude' | 'openai' | 'gemini' | 'ollama' | 'none';
+export type ProviderId = 'copilot' | 'claude-code' | 'claude' | 'openai' | 'gemini' | 'ollama' | 'none';
 
 export type ActivityEvent =
   | { type: 'save'; time: number; file: string; project: string; language: string; linesAdded: number; linesRemoved: number }

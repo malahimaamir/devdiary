@@ -2,6 +2,12 @@
 
 All notable changes to DevDiary are documented here. This project follows [Semantic Versioning](https://semver.org/).
 
+## [0.3.0] - 2026-10-29
+
+### Added
+
+- **Claude Code provider** (`claude-code`): writes reports with your existing Claude Code login via the `claude` CLI — no API key needed. Runs in an empty temp folder with tools disabled. New setting `devdiary.claudeCodePath`.
+
 ## [0.2.2] - 2026-10-29
 
 ### Changed

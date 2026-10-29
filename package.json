@@ -2,7 +2,7 @@
   "name": "devdiary",
   "displayName": "DevDiary – AI Daily Work Report Generator",
   "description": "Automatically tracks what you work on (files, commits, coding time — never your code) and writes your daily work report or standup update with AI, in any language.",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "publisher": "malahimaamir",
   "author": {
     "name": "Malahima Amir"
@@ -44,7 +44,8 @@
     "copilot",
     "claude",
     "ollama",
-    "git"
+    "git",
+    "claude code"
   ],
   "galleryBanner": {
     "color": "#4F46E5",
@@ -126,6 +127,7 @@
           "type": "string",
           "enum": [
             "copilot",
+            "claude-code",
             "claude",
             "openai",
             "gemini",
@@ -134,6 +136,7 @@
           ],
           "enumDescriptions": [
             "GitHub Copilot via the VS Code Language Model API (no API key needed).",
+            "Claude Code CLI — uses your existing Claude Code login, no API key needed.",
             "Anthropic Claude — requires an API key (DevDiary: Set AI API Key).",
             "OpenAI — requires an API key (DevDiary: Set AI API Key).",
             "Google Gemini — requires an API key (DevDiary: Set AI API Key).",
@@ -154,6 +157,12 @@
           "type": "string",
           "default": "http://localhost:11434",
           "description": "Base URL of your Ollama server.",
+          "order": 4
+        },
+        "devdiary.claudeCodePath": {
+          "type": "string",
+          "default": "claude",
+          "markdownDescription": "Command or full path of the Claude Code CLI, used when **AI Provider** is `claude-code`.",
           "order": 4
         },
         "devdiary.autoGenerateAt": {

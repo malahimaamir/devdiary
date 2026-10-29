@@ -6,10 +6,12 @@ import { OpenAIProvider } from './openaiProvider';
 import { GeminiProvider } from './geminiProvider';
 import { OllamaProvider } from './ollamaProvider';
 import { CopilotProvider } from './copilotProvider';
+import { ClaudeCodeProvider } from './claudeCodeProvider';
 
 /** Default model per provider, used when `devdiary.model` is empty. Copilot: '' = first available model. */
 export const DEFAULT_MODELS: Readonly<Record<Exclude<ProviderId, 'none'>, string>> = {
   copilot: '',
+  'claude-code': 'haiku',
   claude: 'claude-haiku-5-5',
   openai: 'gpt-5-mini',
   gemini: 'gemini-flash-latest',
@@ -31,6 +33,8 @@ export function createProvider(id: ProviderId, secrets: vscode.SecretStorage): A
   switch (id) {
     case 'copilot':
       return new CopilotProvider(model);
+    case 'claude-code':
+      return new ClaudeCodeProvider(cfg.claudeCodePath, model);
     case 'claude':
       return new ClaudeProvider(secrets, secretKey(id), model);
     case 'openai':
